@@ -44,7 +44,7 @@ public class MMXXL1 {
         proxy.serverStarting(event);
     }
 
-    public static void doThing() {
+    public static void doThing(int x) {
 
     }
 }
