@@ -1,8 +1,10 @@
 
 name: Update via MergeMasterXXL
 
-schedule:
-  - cron: '0 * * * *'
+on:
+  # schedule:
+  #   - cron: '0 * * * *'
+  workflow_dispatch:
 
 jobs:
   check_changes:
@@ -24,6 +26,7 @@ jobs:
     if: ${{ github.event_name == 'schedule' }}
 
   update-and-tag:
+    name: Update And Tag
     needs: check_changes
     if: ${{ needs.check_changes.outputs.should_run == 'true' }}
     uses: GTNewHorizons/MergeMasterXXL/.github/workflows/update-dev.yml@master
