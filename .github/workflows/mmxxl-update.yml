@@ -7,27 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  check_changes:
-    runs-on: ubuntu-latest
-    name: Check for recent changes
-    outputs:
-      should_run: ${{ steps.should_run.outputs.should_run }}
-    steps:
-      - uses: actions/checkout@v4
-      - id: should_run
-        run: |
-          # Check if there are any commits in the last hour
-          if [[ `git rev-list --after="1 hour" HEAD --count` > 0 ]]; then
-            echo "::set-output name=should_run::true"
-          else
-            echo "::set-output name=should_run::false"
-          fi
-        shell: bash
-    if: ${{ github.event_name == 'schedule' }}
-
   update-and-tag:
     name: Update And Tag
-    needs: check_changes
-    if: ${{ needs.check_changes.outputs.should_run == 'true' }}
     uses: GTNewHorizons/MergeMasterXXL/.github/workflows/update-dev.yml@master
     secrets: inherit
