@@ -43,4 +43,8 @@ public class MMXXL1 {
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
     }
+
+    public static void doThing(int x) {
+
+    }
 }
